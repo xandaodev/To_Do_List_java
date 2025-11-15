@@ -6,7 +6,6 @@ public class Main{
 
     public static void main(String[] args){
         int opcao = -1;
-        System.out.println("Hello word!");
 
         Scanner leitor = new Scanner(System.in); 
         ArrayList<Tarefa> tarefas = new ArrayList<>();
@@ -23,22 +22,24 @@ public class Main{
 
             switch(opcao){
                 case 1:
-                    System.out.println("Inisira a tarefa desejada: ");
+                    System.out.print("\n");
+                    System.out.println("Insira a tarefa desejada: ");
                     String textoDaTarefa = leitor.nextLine();
                     Tarefa novaTarefa = new Tarefa(textoDaTarefa);
                     tarefas.add(novaTarefa);
+                    System.out.print("\n");
                     System.out.println("Tarefa adicionada com sucesso!");
                     System.out.print("\n");
                     break;
                 case 2:
-                    if(verificaListaVazia(tarefas)){
+                    if(listaNaoVazia(tarefas)){
                     System.out.print("\n");
                     System.out.println("Listando todas as tarefas: ");
                     listarTarefas(tarefas);
                     }
                     break;
                 case 3:
-                    if(verificaListaVazia(tarefas)){
+                    if(listaNaoVazia(tarefas)){
                     listarTarefas(tarefas);
                     System.out.print("\n");
                     System.out.println("Qual das tarefas acima voce quer marcar como conluida: ");
@@ -50,14 +51,16 @@ public class Main{
                     }
                     break;
                 case 4:
-                    if(verificaListaVazia(tarefas)){
+                    if(listaNaoVazia(tarefas)){
                     listarTarefas(tarefas);
                     System.out.println("Qual das tarefas acima voce quer remover: ");
                     int numTarefaRemover = leitor.nextInt();
                     leitor.nextLine();
                     int indexRemocao = numTarefaRemover - 1;
                     tarefas.remove(indexRemocao);
+                    System.out.print("\n");
                     System.out.println("Tarefa removida com sucesso!");
+                    System.out.print("\n");
                     }
                     break;
                 case 0:
@@ -82,11 +85,11 @@ public class Main{
         }
     }
 
-    public static boolean verificaListaVazia(ArrayList<Tarefa> lista){
+    public static boolean listaNaoVazia(ArrayList<Tarefa> lista){
         if(lista.size()<=0){
-            System.out.println("\n");
+            System.out.print("\n");
             System.out.println("Voce nao tem tarefas!");
-            System.out.println("\n");
+            System.out.print("\n");
             return false;
         }else{
             return true;

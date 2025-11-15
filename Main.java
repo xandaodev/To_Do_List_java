@@ -7,6 +7,8 @@ public class Main{
         System.out.println("Hello word!");
 
         Scanner leitor = new Scanner(System.in); 
+        ArrayList<String> tarefas = new ArrayList<>();
+        String tarefa;
 
         while(opcao!=0){
             
@@ -14,15 +16,23 @@ public class Main{
             System.out.println("2 - Listar Tarefas");
             System.out.println("0 - Sair!");
             opcao = leitor.nextInt();
+            leitor.nextLine();
 
             switch(opcao){
                 case 1:
                     System.out.println("Inisira a tarefa desejada: ");
-                    //inserirTarefa();
+                    tarefa = leitor.nextLine();
+                    tarefas.add(tarefa);
                     break;
                 case 2:
                     System.out.println("Listando todas as tarefas: ");
-                    //listarTarefas();
+                    System.out.println(" - Minhas Tarefas -");
+                    int i = 1;
+                    for(String t : tarefas){
+                        System.out.println(i + " - " + t);
+                        System.out.print("\n");
+                        i++;
+                    }
                     break;
                 case 0:
                     System.out.println("Saindo... ");

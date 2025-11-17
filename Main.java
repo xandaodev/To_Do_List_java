@@ -11,24 +11,27 @@ public class Main{
         ArrayList<Tarefa> tarefas = new ArrayList<>();
 
         while(opcao!=0){
-            
+            System.out.println("======================================");
             System.out.println("1 - Adicionar Tarefa");
             System.out.println("2 - Listar Tarefas");
             System.out.println("3 - Marcar tarefa como concluida");
             System.out.println("4 - Remover tarefa");
             System.out.println("0 - Sair!");
+            System.out.println("======================================");
             opcao = leitor.nextInt();
             leitor.nextLine();
 
             switch(opcao){
                 case 1:
                     System.out.print("\n");
-                    System.out.println("Insira a tarefa desejada: ");
+                    System.out.print("Insira a tarefa desejada: ");
                     String textoDaTarefa = leitor.nextLine();
                     Tarefa novaTarefa = new Tarefa(textoDaTarefa);
                     tarefas.add(novaTarefa);
                     System.out.print("\n");
+                    System.out.println("..................................");
                     System.out.println("Tarefa adicionada com sucesso!");
+                    System.out.println("..................................");
                     System.out.print("\n");
                     break;
                 case 2:
@@ -42,7 +45,7 @@ public class Main{
                     if(listaNaoVazia(tarefas)){
                     listarTarefas(tarefas);
                     System.out.print("\n");
-                    System.out.println("Qual das tarefas acima voce quer marcar como conluida: ");
+                    System.out.print("Qual das tarefas acima voce quer marcar como conluida: ");
                     int numTarefa = leitor.nextInt();
                     leitor.nextLine();
                     int index = numTarefa - 1;
@@ -53,7 +56,7 @@ public class Main{
                 case 4:
                     if(listaNaoVazia(tarefas)){
                     listarTarefas(tarefas);
-                    System.out.println("Qual das tarefas acima voce quer remover: ");
+                    System.out.print("Qual das tarefas acima voce quer remover: ");
                     int numTarefaRemover = leitor.nextInt();
                     leitor.nextLine();
                     int indexRemocao = numTarefaRemover - 1;

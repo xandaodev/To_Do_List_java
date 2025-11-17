@@ -49,8 +49,15 @@ public class Main{
                     int numTarefa = leitor.nextInt();
                     leitor.nextLine();
                     int index = numTarefa - 1;
-                    Tarefa tarefaParaMarcar = tarefas.get(index);
-                    tarefaParaMarcar.setConcluida(true);
+                    if(index>=0 && index < tarefas.size()){
+                        Tarefa tarefaParaMarcar = tarefas.get(index);
+                        tarefaParaMarcar.setConcluida(true);
+                        System.out.println("Tarefa concluida com sucesso!" + "\n");
+                    }else{
+                        System.out.print("\n");
+                        System.out.println("Tarefa inválida, digite outro numero");
+                        System.out.print("\n");
+                    }
                     }
                     break;
                 case 4:

@@ -60,10 +60,16 @@ public class Main{
                     int numTarefaRemover = leitor.nextInt();
                     leitor.nextLine();
                     int indexRemocao = numTarefaRemover - 1;
-                    tarefas.remove(indexRemocao);
-                    System.out.print("\n");
-                    System.out.println("Tarefa removida com sucesso!");
-                    System.out.print("\n");
+                    if(indexRemocao>=0 && indexRemocao<tarefas.size()){
+                        tarefas.remove(indexRemocao);
+                        System.out.print("\n");
+                        System.out.println("Tarefa removida com sucesso!");
+                        System.out.print("\n");
+                    }else{
+                        System.out.print("\n");
+                        System.out.println("Tarefa inválida, digite outro numero");
+                        System.out.print("\n");
+                    }
                     }
                     break;
                 case 0:

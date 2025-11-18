@@ -128,4 +128,26 @@ public class Main{
             e.printStackTrace();
         }
     }
+
+    public static ArrayList<Tarefa> carregarDados(){
+        ArrayList<Tarefa> tarefasCarregadas = new ArrayList<>();
+
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader("tarefas.txt"));
+            String linha;
+            while ((linha = reader.readLine()) != null){
+                String[] partes = linha.split(";");// no arquivo tarefas.txt cada tarefa é separada por ';', ent temos que separar
+                String descricao = partes[0];
+                boolean status = Boolean.parseBoolean(partes[1]);
+
+                Tarefa t = new Tarefa(descricao);
+                t.setConcluida(status);
+                tarefasCarregadas.add(t);
+            }
+            reader.close();
+        }catch(IOException e){
+            System.out.println("Nenhuma lista salva encontrada. Iniciando nova lista.");
+        }
+        return tarefasCarregadas;
+    }
 }

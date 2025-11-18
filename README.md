@@ -11,5 +11,5 @@ Projeto desenvolvido para estudar lógica, orientação a objetos e manipulaçã
 
 ## Como rodar
 Compile e execute a partir da pasta raiz:
-`javac To_Do_List_java/*.java`
-`java To_Do_List_java.Main`
+javac To_Do_List_java/*.java
+java To_Do_List_java.Main

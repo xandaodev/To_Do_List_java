@@ -1,6 +1,7 @@
 package To_Do_List_java;
 
 import java.util.*;
+import java.io.*;
 public class Main{
     
 
@@ -33,6 +34,7 @@ public class Main{
                     System.out.println("Tarefa adicionada com sucesso!");
                     System.out.println("..................................");
                     System.out.print("\n");
+                    salvarDados(tarefas);
                     break;
                 case 2:
                     if(listaNaoVazia(tarefas)){
@@ -53,6 +55,7 @@ public class Main{
                         Tarefa tarefaParaMarcar = tarefas.get(index);
                         tarefaParaMarcar.setConcluida(true);
                         System.out.println("Tarefa concluida com sucesso!" + "\n");
+                        salvarDados(tarefas);
                     }else{
                         System.out.print("\n");
                         System.out.println("Tarefa inválida, digite outro numero");
@@ -72,6 +75,7 @@ public class Main{
                         System.out.print("\n");
                         System.out.println("Tarefa removida com sucesso!");
                         System.out.print("\n");
+                        salvarDados(tarefas);
                     }else{
                         System.out.print("\n");
                         System.out.println("Tarefa inválida, digite outro numero");
@@ -109,6 +113,19 @@ public class Main{
             return false;
         }else{
             return true;
+        }
+    }
+
+    public static void salvarDados(ArrayList<Tarefa> tarefas){
+        try{
+            BufferedWriter writer = new BufferedWriter(new FileWriter("tarefas.txt"));
+            for(Tarefa t : tarefas){
+                writer.write(t.getDescricao() + ";" + t.isConcluida());
+                writer.newLine();
+            }
+            writer.close();
+        }catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

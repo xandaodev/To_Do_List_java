@@ -9,7 +9,7 @@ public class Main{
         int opcao = -1;
 
         Scanner leitor = new Scanner(System.in); 
-        ArrayList<Tarefa> tarefas = new ArrayList<>();
+        ArrayList<Tarefa> tarefas = carregarDados();
 
         while(opcao!=0){
             System.out.println("======================================");
@@ -21,6 +21,7 @@ public class Main{
             System.out.println("======================================");
             opcao = leitor.nextInt();
             leitor.nextLine();
+            
 
             switch(opcao){
                 case 1:

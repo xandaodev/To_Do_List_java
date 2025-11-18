@@ -12,21 +12,21 @@ public class ToDoListGui extends JFrame {
     private ArrayList<Tarefa> tarefas;
 
     public ToDoListGui(){
-        super("Minha Lista de Tarefas - GUI"); 
+        super("Minha Lista de Tarefas"); 
         
-        // Configurações da Janela
         this.setSize(400, 600); 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         this.setLocationRelativeTo(null);
-        this.setLayout(new BorderLayout()); // Layout principal
+        this.setLayout(new BorderLayout()); // layout principal
 
+        // inicializacao dos dados
+        this.tarefas = carregarDados(); 
+        this.listModel = new DefaultListModel<>();
         this.campoTarefa = new JTextField(); 
-        this.listModel = new DefaultListModel<>(); 
         
         JButton botaoAdicionar = new JButton("Adicionar"); 
 
-
-        // painel superior, entrada
+        // montagem da interface
         JPanel painelEntrada = new JPanel();
         painelEntrada.setLayout(new BorderLayout());
 
@@ -41,24 +41,39 @@ public class ToDoListGui extends JFrame {
         this.add(scrollLista, BorderLayout.CENTER);
 
 
-        // conectando os botoes ao eventos
+        // eventos - adicionar
         botaoAdicionar.addActionListener(e -> {
-            String novaTarefa = this.campoTarefa.getText();
+            String texto = this.campoTarefa.getText().trim();
             
-            if (!novaTarefa.trim().isEmpty()) {
-                this.listModel.addElement(novaTarefa);
+            if (!texto.isEmpty()) {
+                Tarefa novaTarefa = new Tarefa(texto); 
+                this.tarefas.add(novaTarefa); 
+                
+                this.atualizarListaVisual();
+                salvarDados(this.tarefas);
+                
                 this.campoTarefa.setText("");
             }
         });
-        
-        // torna a janela visível
-        this.setVisible(true); 
+
+        this.atualizarListaVisual();
+        this.setVisible(true);
     }
 
     public static void main(String[] args){
         SwingUtilities.invokeLater(() -> {
             new ToDoListGui();
         });
+    }
+
+    private void atualizarListaVisual(){
+        this.listModel.clear();
+        int i = 1;
+        for(Tarefa t : this.tarefas){
+            String status = t.isConcluida() ? "[CONCLUÍDA]" : "[PENDENTE]";
+            this.listModel.addElement(i + ". " + t.getDescricao() + " " + status);
+            i++;
+        }
     }
 
     public static void salvarDados(ArrayList<Tarefa> tarefas){

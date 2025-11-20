@@ -28,6 +28,7 @@ public class ToDoListGui extends JFrame {
         this.campoTarefa = new JTextField(); 
         
         JButton botaoAdicionar = new JButton("Adicionar"); 
+        JButton botaoRemover = new JButton("Remover");
 
         // montagem da interface
         JPanel painelEntrada = new JPanel();
@@ -43,12 +44,12 @@ public class ToDoListGui extends JFrame {
         JScrollPane scrollLista = new JScrollPane(listaVisual); 
         this.add(scrollLista, BorderLayout.CENTER);
 
-
+        this.add(botaoRemover, BorderLayout.SOUTH);
         // eventos - adicionar
         botaoAdicionar.addActionListener(e -> {
             String texto = this.campoTarefa.getText().trim();
             
-            if (!texto.isEmpty()) {
+            if(!texto.isEmpty()){
                 Tarefa novaTarefa = new Tarefa(texto); 
                 this.tarefas.add(novaTarefa); 
                 
@@ -63,18 +64,37 @@ public class ToDoListGui extends JFrame {
         listaVisual.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                // Checa se foi um clique duplo
+                // verifica se foi um clique duplo
                 if (e.getClickCount() == 2) { 
                     int index = listaVisual.locationToIndex(e.getPoint());
-                    
                     if (index >= 0) {
                         Tarefa tarefaSelecionada = tarefas.get(index);
                         tarefaSelecionada.setConcluida(!tarefaSelecionada.isConcluida());
-                    
                         atualizarListaVisual();
                         salvarDados(tarefas);
                     }
                 }
+            }
+        });
+
+        // evento - remover tarefa
+        botaoRemover.addActionListener(r ->{
+            // pega o índice da tarefa selecionada na lista
+            int index = listaVisual.getSelectedIndex(); 
+            
+            // verifica se algo foi selecionado 
+            if(index >= 0){
+                // remove o objeto da lista real
+                this.tarefas.remove(index);
+                
+                // atualiza o visual e salva no arquivo
+                this.atualizarListaVisual();
+                salvarDados(this.tarefas);
+            }else{
+                JOptionPane.showMessageDialog(this, 
+                    "Selecione uma tarefa para remover.", 
+                    "Aviso", 
+                    JOptionPane.WARNING_MESSAGE);
             }
         });
 
@@ -83,7 +103,7 @@ public class ToDoListGui extends JFrame {
     }
 
     public static void main(String[] args){
-        SwingUtilities.invokeLater(() -> {
+        SwingUtilities.invokeLater(() ->{
             new ToDoListGui();
         });
     }

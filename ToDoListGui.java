@@ -1,6 +1,9 @@
 package To_Do_List_java;
 
-import javax.swing.*; 
+import javax.swing.*;
+import java.awt.event.MouseAdapter; 
+import java.awt.event.MouseEvent;
+
 import java.io.*;
 import java.awt.*;
 import java.util.ArrayList; 
@@ -53,6 +56,25 @@ public class ToDoListGui extends JFrame {
                 salvarDados(this.tarefas);
                 
                 this.campoTarefa.setText("");
+            }
+        });
+
+        //evento : marcar e desmarcar
+        listaVisual.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Checa se foi um clique duplo
+                if (e.getClickCount() == 2) { 
+                    int index = listaVisual.locationToIndex(e.getPoint());
+                    
+                    if (index >= 0) {
+                        Tarefa tarefaSelecionada = tarefas.get(index);
+                        tarefaSelecionada.setConcluida(!tarefaSelecionada.isConcluida());
+                    
+                        atualizarListaVisual();
+                        salvarDados(tarefas);
+                    }
+                }
             }
         });
 
